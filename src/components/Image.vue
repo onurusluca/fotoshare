@@ -2,20 +2,6 @@
   <div id="image">
     <h2>Upload Successful</h2>
     <a class="link" target="_blank" :href="src">Image Link</a>
-    <a href=""></a>
-    <button @click="shorter">Get Short URL</button>
-    <br />
-    <input
-      class="copy"
-      v-show="showShort"
-      type="text"
-      :value="urlShare"
-      id="copyCode"
-    />
-    <span v-show="showShort" @click.prevent="copyURL"
-      >Copy The Code
-      <p v-show="copied" class="copied">Code copied!</p>
-    </span>
 
     <a target="_blank" :href="urlShare">
       <img :src="src" alt="Uploaded Picture" />
@@ -24,8 +10,6 @@
 </template>
 
 <script>
-var shortUrl = require("node-url-shortener");
-
 export default {
   name: "Image",
   props: ["src"],
@@ -38,22 +22,15 @@ export default {
   },
 
   methods: {
-    shorter() {
-      shortUrl.short(this.src, (err, url) => {
-        this.urlShare = url;
-        console.log(this.urlShare);
-      });
-      this.showShort = true;
-    },
     copyURL() {
       let testingCodeToCopy = document.querySelector("#copyCode");
       testingCodeToCopy.setAttribute("type", "text");
       testingCodeToCopy.select();
 
       try {
-                    var successful = document.execCommand('copy');
-            var msg = successful ? 'successful' : 'unsuccessful';
-            console.log(msg)
+        var successful = document.execCommand("copy");
+        var msg = successful ? "successful" : "unsuccessful";
+        console.log(msg);
         this.copied = true;
         setTimeout(() => {
           this.copied = false;
@@ -104,11 +81,11 @@ span {
   padding-top: 1vh;
   cursor: pointer;
   padding-bottom: 2vh;
-    text-align: center;
-position: relative;
-display: flex;
-flex-direction: column;
-align-items: center;
+  text-align: center;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .link {
   color: blue;
